@@ -8,10 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      // backgroundImage: {
+      //   'gradient-radial': 'radial-gradient(circle, #2e3c51 2px, transparent 0)'
+      // },
+      keyframes: {
+        dotScroll: {
+          '0%': {"background-position-y": "200px"},
+          '100%': {"background-position-y": "0"}
+        }
+      },
+      animation: {
+        "dot-scrolling": "dotScroll 8s linear infinite"
       },
     },
   },

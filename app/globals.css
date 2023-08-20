@@ -4,24 +4,20 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --tw-bg-opacity: 1;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: rgb(128 140 156 / var(--tw-bg-opacity));
+  background: rgb(16 21 29 / var(--tw-bg-opacity));
+  background-size: calc(14.2857142% - 1px) 100px;
+  background-position: -60 0px;
+  background-image: radial-gradient(circle, #2e3c51 2px, transparent 0);
+  animation: dotScroll 16s linear infinite;
 }
