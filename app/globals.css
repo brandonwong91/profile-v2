@@ -21,3 +21,11 @@ body {
   background-image: radial-gradient(circle, #2e3c51 2px, transparent 0);
   animation: dotScroll 16s linear infinite;
 }
+
+.spotlight {
+  position: absolute;
+  width: 600px; /* Adjust the size of the spotlight */
+  height: 600px;
+  pointer-events: none;
+  mix-blend-mode: multiply; /* Apply blend mode to create spotlight effect */
+}
