@@ -1,4 +1,6 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 interface Experience {
@@ -95,7 +97,7 @@ export default function Home() {
       className="flex flex-col min-h-screen relative w-screen animate-dot-scrolling"
       onMouseMove={handleMouseMove}
     >
-      <div className="pointer-events-none fixed inset-0 z-30 transition duration-300 absolute">
+      <div className="pointer-events-none inset-0 z-30 transition duration-300 absolute">
         <div
           className="spotlight"
           style={{
@@ -108,14 +110,31 @@ export default function Home() {
           }}
         />
       </div>
-      <div className="flex flex-col md:flex-row justify-between px-32 pt-32">
-        <div className="sm:w-full md:w-1/2 gap-y-4 flex flex-col  h-screen">
-          <div className="w-full text-start text-6xl font-bold text-slate-300 sticky">
-            Brandon Wong
+      <div className="flex flex-col md:flex-row justify-between px-32 py-32 max-w-7xl mx-auto">
+        <div className="sm:w-full md:w-1/2 md:top-32 md:sticky h-full justify-between grid">
+          <div className="gap-y-4 flex flex-col">
+            <div className="w-full text-start text-5xl md:text-6xl font-bold text-slate-300">
+              Brandon Wong
+            </div>
+            <div className="text-slate-300">
+              Senior Fullstack Engineer at GIC
+            </div>
+            <div className="text-sm">
+              I build effective interfaces delivering the best user experience.
+            </div>
           </div>
-          <div className="text-slate-300">Senior Fullstack Engineer at GIC</div>
-          <div>
-            I build effective interfaces delivering the best user experience.
+          <div className="flex gap-x-2 mt-4">
+            <Link href="https://www.linkedin.com/in/brandonwong91">
+              <Image
+                src={"/linkedIn.svg"}
+                width={24}
+                height={24}
+                alt="LinkedIn"
+              />
+            </Link>
+            <Link href="https://github.com/brandonwong91">
+              <Image src={"/github.svg"} width={24} height={24} alt="github" />
+            </Link>
           </div>
         </div>
         <div className="sm:w-full md:w-1/2 flex flex-col gap-y-12">
@@ -147,11 +166,8 @@ export default function Home() {
                   <div className="text-xs col-span-1 mt-1">{ex.time}</div>
 
                   <div className="flex flex-col gap-y-2 col-span-2">
-                    <div className="flex gap-x-1 text-slate-200">
-                      <div className="">{ex.title}</div>·
-                      <div className="">{ex.company}</div>
-                    </div>
-                    <div className="text-sm">{ex.description}</div>
+                    <div className="text-slate-200">{`${ex.title} · ${ex.company}`}</div>
+                    ·<div className="text-sm">{ex.description}</div>
                     <div className="flex gap-2 flex-wrap">
                       {ex.skills.map((skill) => {
                         return (
