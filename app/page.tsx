@@ -1,7 +1,8 @@
 "use client";
+import { Scrollspy } from "@makotot/ghostui";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface Experience {
   time: string;
@@ -13,6 +14,10 @@ interface Experience {
 }
 
 export default function Home() {
+  const sectionRefs = [
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+  ];
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event: React.MouseEvent) => {
@@ -92,6 +97,11 @@ export default function Home() {
       skills: ["VBA"],
     },
   ];
+
+  const navItems = [
+    { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
+  ];
   return (
     <main
       className="flex flex-col min-h-screen relative w-screen animate-dot-scrolling"
@@ -110,83 +120,128 @@ export default function Home() {
           }}
         />
       </div>
-      <div className="flex flex-col md:flex-row justify-between px-32 py-32 max-w-7xl mx-auto">
-        <div className="sm:w-full md:w-1/2 md:top-32 md:sticky h-full justify-between grid">
-          <div className="gap-y-4 flex flex-col">
-            <div className="w-full text-start text-5xl md:text-6xl font-bold text-slate-300">
-              Brandon Wong
-            </div>
-            <div className="text-slate-300">
-              Senior Fullstack Engineer at GIC
-            </div>
-            <div className="text-sm">
-              I build effective interfaces delivering the best user experience.
-            </div>
-          </div>
-          <div className="flex gap-x-2 mt-4">
-            <Link href="https://www.linkedin.com/in/brandonwong91">
-              <Image
-                src={"/linkedIn.svg"}
-                width={24}
-                height={24}
-                alt="LinkedIn"
-              />
-            </Link>
-            <Link href="https://github.com/brandonwong91">
-              <Image src={"/github.svg"} width={24} height={24} alt="github" />
-            </Link>
-          </div>
-        </div>
-        <div className="sm:w-full md:w-1/2 flex flex-col gap-y-12">
-          <div className="text-justify mt-1 flex flex-col gap-y-2 text-sm">
-            <span>
-              I am a seasoned Fullstack Engineer with a strong passion for
-              crafting exceptional digital experiences. My journey in the world
-              of technology has led me to specialize in building and optimizing
-              zero-to-one processes, architecting robust microservices, and
-              delivering innovative engineering solutions.
-            </span>
-            <span>
-              From enhancing user interactivity and responsiveness to
-              implementing seamless onboarding flows and predictive models, I
-              take pride in my ability to bring ideas to life. My commitment to
-              clean software design methodologies, coupled with a history of
-              successful project deployments, has empowered businesses to make
-              informed decisions and achieve digital transformation.
-            </span>
-          </div>
-
-          {experiences.map((ex) => {
-            return (
-              <div
-                className="rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block hover:bg-slate-800/50 hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg hover:rounded-lg -m-3 p-3 hover:text-slate-300 text-slate-400 border border-transparent hover:bg-opacity-50"
-                key={ex.company}
-              >
-                <div className="grid grid-cols-3">
-                  <div className="text-xs col-span-1 mt-1">{ex.time}</div>
-
-                  <div className="flex flex-col gap-y-2 col-span-2">
-                    <div className="text-slate-200">{`${ex.title} · ${ex.company}`}</div>
-                    ·<div className="text-sm">{ex.description}</div>
-                    <div className="flex gap-2 flex-wrap">
-                      {ex.skills.map((skill) => {
-                        return (
-                          <div
-                            key={skill}
-                            className="flex items-center rounded-full bg-blue-400/10 px-3 py-1 text-xs font-medium leading-5 text-blue-300 "
-                          >
-                            {skill}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
+      <Scrollspy sectionRefs={sectionRefs}>
+        {({ currentElementIndexInViewport }) => (
+          <div className="flex flex-col lg:flex-row justify-between px-32 py-32 max-w-7xl mx-auto">
+            <div className="sm:w-full lg:w-1/2 lg:top-32 lg:sticky h-full justify-between grid gap-y-4">
+              <div className="gap-y-4 flex flex-col">
+                <div className="w-full text-start text-5xl lg:text-6xl font-bold text-slate-300">
+                  Brandon Wong
+                </div>
+                <div className="text-slate-300">
+                  Senior Fullstack Engineer at GIC
+                </div>
+                <div className="text-sm">
+                  I build effective interfaces delivering the best user
+                  experience.
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </div>
+              <div className="flex gap-x-2">
+                <Link href="https://www.linkedin.com/in/brandonwong91">
+                  <Image
+                    src={"/linkedIn.svg"}
+                    width={24}
+                    height={24}
+                    alt="LinkedIn"
+                  />
+                </Link>
+                <Link href="https://github.com/brandonwong91">
+                  <Image
+                    src={"/github.svg"}
+                    width={24}
+                    height={24}
+                    alt="github"
+                  />
+                </Link>
+              </div>
+              <div className="lg:flex lg:flex-col hidden">
+                {navItems.map(({ name, href }, index) => {
+                  return (
+                    <a
+                      key={name}
+                      href={href}
+                      className={
+                        currentElementIndexInViewport === index
+                          ? "text-slate-200"
+                          : "text-slate-700"
+                      }
+                    >
+                      {name}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="sm:w-full lg:w-1/2 flex flex-col gap-y-12">
+              <div
+                className="mt-1 flex flex-col gap-y-2 text-sm sm:mt-4"
+                id="about"
+                ref={sectionRefs[0]}
+              >
+                <span className="w-full sticky top-0 py-3 z-10 backdrop-blur-xl lg:hidden text-lg">
+                  About
+                </span>
+                <span>
+                  I am a seasoned Fullstack Engineer with a strong passion for
+                  crafting exceptional digital experiences. My journey in the
+                  world of technology has led me to specialize in building and
+                  optimizing zero-to-one processes, architecting robust
+                  microservices, and delivering innovative engineering
+                  solutions.
+                </span>
+                <span>
+                  From enhancing user interactivity and responsiveness to
+                  implementing seamless onboarding flows and predictive models,
+                  I take pride in my ability to bring ideas to life. My
+                  commitment to clean software design methodologies, coupled
+                  with a history of successful project deployments, has
+                  empowered businesses to make informed decisions and achieve
+                  digital transformation.
+                </span>
+              </div>
+              <div
+                id="experience"
+                ref={sectionRefs[1]}
+                className="flex flex-col gap-y-12"
+              >
+                <span className="w-full sticky top-0 z-10 -my-4 py-3 backdrop-blur lg:hidden text-lg">
+                  Experience
+                </span>
+                {experiences.map((ex) => {
+                  return (
+                    <div
+                      className="rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block hover:bg-slate-800/50 hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg hover:rounded-lg -m-3 p-3 hover:text-slate-300 text-slate-400 border border-transparent hover:bg-opacity-50"
+                      key={ex.company}
+                    >
+                      <div className="grid lg:grid-cols-3 grid-cols-1">
+                        <div className="text-xs col-span-1 mt-1 lg:mb-0 mb-2">
+                          {ex.time}
+                        </div>
+                        <div className="flex flex-col gap-y-2 col-span-2">
+                          <div className="text-slate-200">{`${ex.title} · ${ex.company}`}</div>
+                          <div className="text-sm">{ex.description}</div>
+                          <div className="flex gap-2 flex-wrap">
+                            {ex.skills.map((skill) => {
+                              return (
+                                <div
+                                  key={skill}
+                                  className="flex items-center rounded-full bg-blue-400/10 px-3 py-1 text-xs font-medium leading-5 text-blue-300 "
+                                >
+                                  {skill}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+      </Scrollspy>
     </main>
   );
 }
