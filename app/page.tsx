@@ -177,7 +177,7 @@ export default function Home() {
                 className="mt-1 flex flex-col gap-y-2 text-sm sm:mt-4"
                 ref={sectionRefs[0]}
               >
-                <span className="w-full sticky top-0 py-3 z-10 backdrop-blur-xl lg:hidden text-lg text-slate-300">
+                <span className="sticky top-0 py-3 z-10 backdrop-blur-sm -mx-3 px-3 lg:hidden text-lg text-slate-300 rounded-b-md w-[110%]">
                   About
                 </span>
                 <span>
@@ -199,7 +199,7 @@ export default function Home() {
                 </span>
               </div>
               <div className="relative -top-32 lg:mt-32" id="experience" />
-              <span className="w-full sticky top-0 z-10 py-3 backdrop-blur lg:hidden text-lg rounded-md my-3 text-slate-300">
+              <span className="w-[110%] rounded-b-md sticky top-0 z-10 py-3 backdrop-blur-sm lg:hidden text-lg rounded-md my-3 text-slate-300 -ml-4 px-4">
                 Experience
               </span>
               <div className="flex flex-col gap-y-12" ref={sectionRefs[1]}>
