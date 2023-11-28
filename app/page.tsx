@@ -21,7 +21,7 @@ export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event: React.MouseEvent) => {
-    setMousePosition({ x: event.clientX, y: event.clientY });
+    setMousePosition({ x: event.pageX, y: event.pageY });
   };
   const experiences: Experience[] = [
     {
@@ -112,11 +112,10 @@ export default function Home() {
           className="spotlight"
           style={{
             background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`,
-            top: "50%",
-            left: "50%",
+            top: "0",
+            left: "0",
             width: "100%",
             height: "100%",
-            transform: "translate(-50%, -50%)",
           }}
         />
       </div>
