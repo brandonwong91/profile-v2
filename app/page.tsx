@@ -25,7 +25,7 @@ export default function Home() {
   };
   const experiences: Experience[] = [
     {
-      time: "JUL 2023 - NOW",
+      time: "JUL 2023 - Present",
       title: "Senior Fullstack Engineer",
       company: "GIC",
       companyUrl: "https://www.gic.com.sg",
@@ -121,10 +121,10 @@ export default function Home() {
       </div>
       <Scrollspy sectionRefs={sectionRefs}>
         {({ currentElementIndexInViewport }) => (
-          <div className="flex flex-col lg:flex-row justify-between px-32 py-32 max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row justify-between px-32 py-32 max-w-2xl lg:max-w-7xl mx-auto">
             <div className="sm:w-full lg:w-1/2 lg:top-32 lg:sticky h-full justify-between grid gap-y-4">
               <div className="gap-y-4 flex flex-col">
-                <div className="w-full text-start text-5xl lg:text-6xl font-bold text-slate-300">
+                <div className="w-full text-start md:text-5xl lg:text-6xl font-bold text-slate-300 text-4xl">
                   Brandon Wong
                 </div>
                 <div className="text-slate-300">
@@ -153,7 +153,7 @@ export default function Home() {
                   />
                 </Link>
               </div>
-              <div className="lg:flex lg:flex-col hidden">
+              <div className="lg:flex lg:flex-col hidden lg:gap-y-2">
                 {navItems.map(({ name, href }, index) => {
                   return (
                     <a
@@ -171,13 +171,13 @@ export default function Home() {
                 })}
               </div>
             </div>
-            <div className="sm:w-full lg:w-1/2 flex flex-col gap-y-12">
+            <div className="sm:w-full lg:w-1/2 flex flex-col">
+              <div className="relative -top-32" id="about" />
               <div
                 className="mt-1 flex flex-col gap-y-2 text-sm sm:mt-4"
-                id="about"
                 ref={sectionRefs[0]}
               >
-                <span className="w-full sticky top-0 py-3 z-10 backdrop-blur-xl lg:hidden text-lg">
+                <span className="w-full sticky top-0 py-3 z-10 backdrop-blur-xl lg:hidden text-lg text-slate-300">
                   About
                 </span>
                 <span>
@@ -198,22 +198,20 @@ export default function Home() {
                   digital transformation.
                 </span>
               </div>
-              <div
-                id="experience"
-                ref={sectionRefs[1]}
-                className="flex flex-col gap-y-12"
-              >
-                <span className="w-full sticky top-0 z-10 -my-4 py-3 backdrop-blur lg:hidden text-lg">
-                  Experience
-                </span>
-                {experiences.map((ex) => {
+              <div className="relative -top-32 lg:mt-32" id="experience" />
+              <span className="w-full sticky top-0 z-10 py-3 backdrop-blur lg:hidden text-lg rounded-md my-3 text-slate-300">
+                Experience
+              </span>
+              <div className="flex flex-col gap-y-12" ref={sectionRefs[1]}>
+                {experiences.map((ex, index) => {
                   return (
                     <div
                       className="rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block hover:bg-slate-800/50 hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg hover:rounded-lg -m-3 p-3 hover:text-slate-300 text-slate-400 border border-transparent hover:bg-opacity-50"
                       key={ex.company}
+                      ref={sectionRefs[index + 1]}
                     >
                       <div className="grid lg:grid-cols-3 grid-cols-1">
-                        <div className="text-xs col-span-1 mt-1 lg:mb-0 mb-2">
+                        <div className={"text-xs col-span-1 mt-1 lg:mb-0 mb-2"}>
                           {ex.time}
                         </div>
                         <div className="flex flex-col gap-y-2 col-span-2">
@@ -224,7 +222,7 @@ export default function Home() {
                               return (
                                 <div
                                   key={skill}
-                                  className="flex items-center rounded-full bg-blue-400/10 px-3 py-1 text-xs font-medium leading-5 text-blue-300 "
+                                  className="flex items-center rounded-full bg-blue-400/10 px-3 py-1 text-xs font-medium leading-5 text-blue-300"
                                 >
                                   {skill}
                                 </div>
