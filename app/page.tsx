@@ -121,7 +121,7 @@ export default function Home() {
       </div>
       <Scrollspy sectionRefs={sectionRefs}>
         {({ currentElementIndexInViewport }) => (
-          <div className="flex flex-col lg:flex-row justify-between px-32 py-32 max-w-2xl lg:max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row justify-between p-20 md:p-24 lg:p-32 max-w-2xl lg:max-w-7xl mx-auto">
             <div className="sm:w-full lg:w-1/2 lg:top-32 lg:sticky h-full justify-between grid gap-y-4">
               <div className="gap-y-4 flex flex-col">
                 <div className="w-full text-start md:text-5xl lg:text-6xl font-bold text-slate-300 text-4xl">
@@ -210,7 +210,7 @@ export default function Home() {
                       key={ex.company}
                       ref={sectionRefs[index + 1]}
                     >
-                      <div className="grid lg:grid-cols-3 grid-cols-1">
+                      <div className="grid md:grid-cols-3  grid-cols-1">
                         <div className={"text-xs col-span-1 mt-1 lg:mb-0 mb-2"}>
                           {ex.time}
                         </div>
