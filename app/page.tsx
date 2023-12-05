@@ -104,7 +104,7 @@ export default function Home() {
   ];
   return (
     <main
-      className="flex flex-col min-h-screen relative w-screen animate-dot-scrolling"
+      className="flex flex-col min-h-screen relative w-full animate-dot-scrolling"
       onMouseMove={handleMouseMove}
     >
       <div className="pointer-events-none inset-0 z-30 transition duration-300 absolute">
