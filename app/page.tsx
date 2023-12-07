@@ -20,11 +20,13 @@ export default function Home() {
   ];
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  const handleMouseMove = (event: React.MouseEvent) => {
+    setMousePosition({ x: event.pageX, y: event.pageY });
+  };
   const handleTouchMove = (event: React.TouchEvent) => {
     const touch = event.touches[0];
     setMousePosition({ x: touch.pageX, y: touch.pageY });
   };
-
   const experiences: Experience[] = [
     {
       time: "JUL 2023 - Present",
@@ -107,6 +109,7 @@ export default function Home() {
   return (
     <main
       className="flex flex-col min-h-screen relative w-full animate-dot-scrolling"
+      onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
     >
       <div className="pointer-events-none inset-0 z-30 transition duration-300 absolute">
