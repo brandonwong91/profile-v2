@@ -5,8 +5,32 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Brandon Wong - Dev",
-  description: "powered by NextJS",
+  title: "Brandon Wong | Dev",
+  description: "Frontend enthusiast, web developer",
+  metadataBase: new URL("https://www.brandonwongck.com"),
+  keywords: ["howmuch", "brandonwongck", "Brandon Wong"],
+  authors: [{ name: "Brandon Wong", url: "https://www.brandonwongck.com" }],
+  creator: "Brandon Wong",
+  openGraph: {
+    url: "https://www.brandonwongck.com",
+    siteName: "Brandon Wong | Dev",
+    images: "/og-image.png",
+    locale: "en_US",
+    type: "website",
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
