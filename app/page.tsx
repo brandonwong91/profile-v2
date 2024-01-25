@@ -3,6 +3,10 @@ import { Scrollspy } from "@makotot/ghostui";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import howMuchAhImage from "../public/how-much-ah.png";
+import doggieSeeImage from "../public/doggie-see.png";
+import keepUpImage from "../public/keep-up.png";
+import profileV1Image from "../public/profile-v1.png";
 
 interface Experience {
   time: string;
@@ -15,6 +19,7 @@ interface Experience {
 
 export default function Home() {
   const sectionRefs = [
+    useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
   ];
@@ -102,9 +107,43 @@ export default function Home() {
     },
   ];
 
+  const projects = [
+    {
+      imageUrl: howMuchAhImage,
+      title: "How much ah",
+      url: "https://howmuch.brandonwongck.com/",
+      description:
+        "An easy Singapore based meal bill splitter. Minimumly 3 pax and more!",
+      skills: ["NextJS", "shad/cn"],
+    },
+    {
+      imageUrl: doggieSeeImage,
+      title: "Doggie see",
+      url: "https://doggie-see.vercel.app/",
+      description:
+        "Search bar implementation for the Dog API to look up on breeds",
+      skills: ["NextJS", "shad/cn"],
+    },
+    {
+      imageUrl: keepUpImage,
+      title: "Keep Up",
+      url: "https://keep-up.vercel.app/",
+      description: "Supercharged ToDo list, attempting to better Google Keep.",
+      skills: ["NextJS", "GeistUI", "create-t3", "mongoDB"],
+    },
+    {
+      imageUrl: profileV1Image,
+      title: "Profile V1",
+      url: "https://brandondon.vercel.app/",
+      description: "First attempt of creating a profile page.",
+      skills: ["RemixJS", "DaisyUI"],
+    },
+  ];
+
   const navItems = [
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
   ];
   return (
     <main
@@ -160,14 +199,34 @@ export default function Home() {
               </div>
               <div className="lg:flex lg:flex-col hidden lg:gap-y-2">
                 {navItems.map(({ name, href }, index) => {
+                  console.log(
+                    "currentIndex",
+                    currentElementIndexInViewport,
+                    "in",
+                    index
+                  );
+                  let inViewPort = false;
+                  switch (currentElementIndexInViewport) {
+                    case 0:
+                      inViewPort = index === 0;
+                      break;
+                    case 1:
+                    case -1:
+                      inViewPort = index === 1;
+                      break;
+                    case 2:
+                      inViewPort = index === 2;
+                      break;
+
+                    default:
+                      inViewPort = false;
+                  }
                   return (
                     <a
                       key={name}
                       href={href}
                       className={
-                        currentElementIndexInViewport === index
-                          ? "text-slate-200"
-                          : "text-slate-700"
+                        inViewPort ? "text-slate-200" : "text-slate-700"
                       }
                     >
                       {name}
@@ -208,37 +267,95 @@ export default function Home() {
                 Experience
               </span>
               <div className="flex flex-col gap-y-12" ref={sectionRefs[1]}>
-                {experiences.map((ex, index) => {
-                  return (
-                    <div
-                      className="rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block hover:bg-slate-800/50 hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg hover:rounded-lg -m-3 p-3 hover:text-slate-300 text-slate-400 border border-transparent hover:bg-opacity-50"
-                      key={ex.company}
-                      ref={sectionRefs[index + 1]}
-                    >
-                      <div className="grid md:grid-cols-3  grid-cols-1">
-                        <div className={"text-xs col-span-1 mt-1 lg:mb-0 mb-2"}>
-                          {ex.time}
-                        </div>
-                        <div className="flex flex-col gap-y-2 col-span-2">
-                          <div className="text-slate-200">{`${ex.title} · ${ex.company}`}</div>
-                          <div className="text-sm">{ex.description}</div>
-                          <div className="flex gap-2 flex-wrap">
-                            {ex.skills.map((skill) => {
-                              return (
-                                <div
-                                  key={skill}
-                                  className="flex items-center rounded-full bg-blue-400/10 px-3 py-1 text-xs font-medium leading-5 text-blue-300"
-                                >
-                                  {skill}
-                                </div>
-                              );
-                            })}
+                {experiences.map(
+                  (
+                    { company, companyUrl, title, time, skills, description },
+                    index
+                  ) => {
+                    return (
+                      <div
+                        className="rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block hover:bg-slate-800/50 hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg hover:rounded-lg -m-3 p-3 hover:text-slate-300 text-slate-400 border border-transparent hover:bg-opacity-50"
+                        key={company}
+                        ref={sectionRefs[index + 1]}
+                      >
+                        <div className="grid md:grid-cols-3  grid-cols-1">
+                          <div
+                            className={"text-xs col-span-1 mt-1 lg:mb-0 mb-2"}
+                          >
+                            {time}
+                          </div>
+                          <div className="flex flex-col gap-y-2 col-span-2">
+                            <div className="text-slate-200">{`${title} · ${company}`}</div>
+                            <div className="text-sm">{description}</div>
+                            <div className="flex gap-2 flex-wrap">
+                              {skills.map((skill) => {
+                                return (
+                                  <div
+                                    key={skill}
+                                    className="flex items-center rounded-full bg-blue-400/10 px-3 py-1 text-xs font-medium leading-5 text-blue-300"
+                                  >
+                                    {skill}
+                                  </div>
+                                );
+                              })}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  }
+                )}
+              </div>
+              <div className="relative -top-32 lg:mt-32" id="projects" />
+              <span className="w-[110%] rounded-b-md sticky top-0 z-10 py-3 backdrop-blur-sm lg:hidden text-lg rounded-md my-3 text-slate-300 -ml-4 px-4">
+                Projects
+              </span>
+              <div className="flex flex-col gap-y-12" ref={sectionRefs[2]}>
+                {projects.map(
+                  ({ title, imageUrl, url, description, skills }, index) => {
+                    return (
+                      <div
+                        className="rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block hover:bg-slate-800/50 hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg hover:rounded-lg -m-3 p-3 hover:text-slate-300 text-slate-400 border border-transparent hover:bg-opacity-50"
+                        key={title}
+                        ref={sectionRefs[index + 1]}
+                      >
+                        <div className="md:grid-cols-3 md:grid flex flex-col-reverse">
+                          <div
+                            className={
+                              "text-xs col-span-1 mt-1 lg:mb-0 mb-2 md:pr-4"
+                            }
+                          >
+                            <Image
+                              src={imageUrl}
+                              alt={"how-much-ah"}
+                              placeholder="blur"
+                            />
+                          </div>
+                          <div className="flex flex-col gap-y-2 col-span-2">
+                            <Link
+                              className="text-slate-200 hover:text-blue-300"
+                              href={url}
+                              target="_blank"
+                            >{`${title}`}</Link>
+                            <div className="text-sm">{description}</div>
+                            <div className="flex gap-2">
+                              {skills.map((skill) => {
+                                return (
+                                  <div
+                                    key={skill}
+                                    className="flex items-center rounded-full bg-blue-400/10 px-3 py-1 text-xs font-medium leading-5 text-blue-300 w-fit"
+                                  >
+                                    {skill}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                )}
               </div>
             </div>
           </div>
