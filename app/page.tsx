@@ -7,6 +7,7 @@ import howMuchAhImage from "../public/how-much-ah.png";
 import doggieSeeImage from "../public/doggie-see.png";
 import keepUpImage from "../public/keep-up.png";
 import profileV1Image from "../public/profile-v1.png";
+import venturousGroupImage from "../public/venturous-group.png";
 
 interface Experience {
   time: string;
@@ -125,11 +126,18 @@ export default function Home() {
       skills: ["NextJS", "shad/cn"],
     },
     {
+      imageUrl: venturousGroupImage,
+      title: "Venturous Group",
+      url: "https://www.venturousgroup.com/",
+      description: "Build and developed landing page with CMS from figma.",
+      skills: ["NextJS", "PayloadCMS", "MongoDB"],
+    },
+    {
       imageUrl: keepUpImage,
       title: "Keep Up",
       url: "https://keep-up.vercel.app/",
       description: "Supercharged ToDo list, attempting to better Google Keep.",
-      skills: ["NextJS", "GeistUI", "create-t3", "mongoDB"],
+      skills: ["NextJS", "GeistUI", "create-t3-app", "MongoDB"],
     },
     {
       imageUrl: profileV1Image,
@@ -168,7 +176,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row justify-between p-20 md:p-24 lg:p-32 max-w-2xl lg:max-w-7xl mx-auto">
             <div className="sm:w-full lg:w-1/2 lg:top-32 lg:sticky h-full justify-between grid gap-y-4">
               <div className="gap-y-4 flex flex-col">
-                <div className="w-full text-start md:text-5xl lg:text-6xl font-bold text-slate-300 text-4xl">
+                <div className="w-full text-start md:text-5xl lg:text-6xl font-bold text-slate-300 text-3xl">
                   Brandon Wong
                 </div>
                 <div className="text-slate-300">
@@ -199,12 +207,6 @@ export default function Home() {
               </div>
               <div className="lg:flex lg:flex-col hidden lg:gap-y-2">
                 {navItems.map(({ name, href }, index) => {
-                  console.log(
-                    "currentIndex",
-                    currentElementIndexInViewport,
-                    "in",
-                    index
-                  );
                   let inViewPort = false;
                   switch (currentElementIndexInViewport) {
                     case 0:
@@ -333,12 +335,12 @@ export default function Home() {
                           </div>
                           <div className="flex flex-col gap-y-2 col-span-2">
                             <Link
-                              className="text-slate-200 hover:text-blue-300"
+                              className="text-slate-200 hover:text-blue-300 w-fit"
                               href={url}
                               target="_blank"
                             >{`${title}`}</Link>
                             <div className="text-sm">{description}</div>
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 flex-wrap mb-3">
                               {skills.map((skill) => {
                                 return (
                                   <div
