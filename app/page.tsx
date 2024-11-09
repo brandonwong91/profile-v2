@@ -153,6 +153,21 @@ export default function Home() {
     { name: "Experience", href: "#experience" },
     { name: "Projects", href: "#projects" },
   ];
+
+  const handleCopyClick = () => {
+    const textToCopy1 = document.getElementById("textToCopy1")?.innerText || "";
+    const textToCopy2 = document.getElementById("textToCopy2")?.innerText || "";
+    const combinedText = `${textToCopy1} ${textToCopy2}`;
+    navigator.clipboard
+      .writeText(combinedText)
+      .then(() => {
+        alert("Text copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
+  };
+
   return (
     <main
       className="flex flex-col min-h-screen relative w-full animate-dot-scrolling"
@@ -242,11 +257,12 @@ export default function Home() {
               <div
                 className="mt-1 flex flex-col gap-y-2 text-sm sm:mt-4"
                 ref={sectionRefs[0]}
+                onClick={handleCopyClick}
               >
                 <span className="sticky top-0 py-3 z-10 backdrop-blur-sm -mx-3 px-3 lg:hidden text-lg text-slate-300 rounded-b-md w-[110%]">
                   About
                 </span>
-                <span>
+                <span id="textToCopy1">
                   I am a seasoned Fullstack Engineer with a strong passion for
                   crafting exceptional digital experiences. My journey in the
                   world of technology has led me to specialize in building and
@@ -254,7 +270,7 @@ export default function Home() {
                   microservices, and delivering innovative engineering
                   solutions.
                 </span>
-                <span>
+                <span id="textToCopy2">
                   From enhancing user interactivity and responsiveness to
                   implementing seamless onboarding flows and predictive models,
                   I take pride in my ability to bring ideas to life. My
