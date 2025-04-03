@@ -35,12 +35,20 @@ export default function Home() {
   };
   const experiences: Experience[] = [
     {
-      time: "JUL 2023 - Present",
+      time: "MAR 2025 - PRESENT",
+      title: "Senior Lead Fullstack Engineer",
+      company: "Kyndryl",
+      companyUrl: "https://www.kyndryl.com",
+      description: `Design, build, and integrate scalable full-stack and AI-driven applications using modern frameworks and cloud services. Lead PoCs, assess tech maturity, and collaborate with clients to develop tailored AI and software solutions. Drive innovation, identify new opportunities, and enhance AI offerings through agile development and thought leadership.`,
+      skills: ["NextJS", "GCP", "GEN AI"],
+    },
+    {
+      time: "JUL 2023 - MAR 2025",
       title: "Senior Fullstack Engineer",
       company: "GIC",
       companyUrl: "https://www.gic.com.sg",
       description:
-        "I build data-driven applications to drive insights from multiple databases.",
+        "Developed submission dashboard for data ingestion pipeline along with maintaining API migrations.",
       skills: ["NextJS", "Java", "AWS"],
     },
     {
@@ -303,7 +311,16 @@ export default function Home() {
                             {time}
                           </div>
                           <div className="flex flex-col gap-y-2 col-span-2">
-                            <div className="text-slate-200">{`${title} · ${company}`}</div>
+                            <div className="text-slate-200">
+                              {`${title} · `}
+                              <Link
+                                className="text-slate-200 hover:text-blue-300"
+                                href={companyUrl}
+                                target="_blank"
+                              >
+                                {company}
+                              </Link>
+                            </div>
                             <div className="text-sm">{description}</div>
                             <div className="flex gap-2 flex-wrap">
                               {skills.map((skill) => {
